@@ -1,23 +1,33 @@
 package ogr.lessons.java.shop;
 
+import java.util.Random;
+
 public class Product {
 
-	private int code = 5258;
+	private int code;
 	private String name;
 	private String description;
 	private double price;
-	private final int VAT = 22; // valore da calcolare in %
+	private int vat; // valore da calcolare in %
 	
 	
 	// COSTRUTTORE
 	
-	public Product(int code, String name, String description, double price) {
+	public Product(String name, String description, double price, int vat) {
 		
-		setCode(code);
+		genRandCode();
 		setName(name);
 		setDescription(description);
 		setPrice(price);
+		setVat(vat);
 		
+	}
+	
+	private void genRandCode() {
+		
+		Random rnd = new Random();
+		
+		setCode(rnd.nextInt(0, Integer.MAX_VALUE));
 	}
 	
 	
@@ -40,7 +50,7 @@ public class Product {
 	}
 	
 	public int getVat() {
-		return VAT;
+		return vat;
 	}
 	
 	
@@ -69,6 +79,12 @@ public class Product {
 		
 	}
 	
+	public void setVat(int vat) {
+		
+		this.vat = vat;
+		
+	}
+	
 	
 	// METODI 
 	
@@ -80,7 +96,7 @@ public class Product {
 	
 	public double getConsumerPrice() {
 			
-		double finalPrice = price + (price * VAT / 100);
+		double finalPrice = price + (price * vat / 100);
 	
 		return  finalPrice;
 		
